@@ -481,7 +481,7 @@ namespace DNNConnect.CKEditorProvider.Browser
 
             //START persian-dnnsoftware
             //jqueryUiScriptLink.Attributes["src"] = "//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js";
-            jqueryUiScriptLink.Attributes["src"] = this.ResolveUrl("js /jquery-ui.min.js");
+            jqueryUiScriptLink.Attributes["src"] = this.ResolveUrl("js/jquery-ui.min.js");
             //END persian-dnnsoftware
 
             this.favicon.Controls.Add(jqueryUiScriptLink);

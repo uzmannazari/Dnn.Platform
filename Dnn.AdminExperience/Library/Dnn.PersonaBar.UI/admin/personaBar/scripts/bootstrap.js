@@ -33,10 +33,29 @@
     }
     else{
         styles.push(themeCss);
+
+    //START persian-dnnsoftware
+    if (window.parent['personaBarSettings']['culture'] == 'fa-IR' || window.parent['personaBarSettings']['culture'].startsWith("ar-")) {
+        mainJs = 'scripts/main.rtl.js';
+        mainCss = 'css/main.rtl.css';
+        
+    }
+    //END persian-dnnsoftware
+
+    if (skin) {
+        mainCss = 'css/' + skin + '.css';
     }
 
     styles.push(mainCss);
-    styles.push('css/graph.css');
+
+    //START persian-dnnsoftware
+    if (window.parent['personaBarSettings']['culture'] == 'fa-IR' || window.parent['personaBarSettings']['culture'].startsWith("ar-")) {
+        styles.push('css/graph.rtl.css');
+    } else {
+        styles.push('css/graph.css');
+    }
+    //END persian-dnnsoftware
+
 
     addCssToHead(styles, version);
     addJsToBody(mainJs, version);

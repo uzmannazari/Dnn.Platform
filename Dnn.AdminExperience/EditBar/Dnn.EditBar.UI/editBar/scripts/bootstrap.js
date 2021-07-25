@@ -30,14 +30,6 @@
     var themeCss = 'css/theme.css';
     var mainCss = mobi ? 'css/main.mobi.css' : 'css/main.css';
 
-    var hasCustomEditBarTheme = editBarSettings['editBarTheme'];
-    if (hasCustomEditBarTheme){
-        styles.push('../../../../Portals/_default/EditBarTheme.css');
-    }
-    else{
-        styles.push(themeCss);
-    }
-
     styles.push(mainCss);
 
     addCssToHead(styles, version);

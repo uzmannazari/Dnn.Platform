@@ -87,7 +87,8 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
         var $personaBar = $('#personabar');
         var $showSiteButton = $('#showsite');
         var customModules = [];
-        
+        var disableEditBar = window.parent['personaBarSettings']['disableEditBar'] === true;
+
         window.requirejs.config({
             paths: {
                 'rootPath': utility.getApplicationRootPath()
@@ -103,7 +104,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
             $('body').addClass('rtl');
         }
         //END persian-dnnsoftware
-        
+
         var menuViewModel = utility.buildMenuViewModel(config.menuStructure);
         var cachedPersonaBarPageWidth = 860;
 
@@ -162,7 +163,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                     self.panelViewData(null, null);
                 }
 
-                parentBody.style.overflow = "auto";
+                parentBody.style.removeProperty('overflow');
                 body.style.overflow = "hidden";
 
                 inAnimation = true;
@@ -443,11 +444,11 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
             loadBundleScript: function (path) {
 
                 var urls = path;
-                if (Array.isArray(urls) === false) {
+                if(Array.isArray(urls) === false) {
                     urls = [path];
                 }
                 function ajax(urls, build) {
-                    if (urls.length == 0) {
+                    if(urls.length == 0) {
                         return;
                     }
                     $.ajax({
@@ -457,12 +458,12 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                             cdv: build
                         },
                         url: urls.pop(),
-                        complete: function () {
+                        complete: function() {
                             ajax(urls, build);
                         }
                     });
                 }
-
+                    
                 ajax(urls.reverse(), config.buildNumber);
             },
             panelViewData: function (panelId, viewData) {
@@ -692,6 +693,28 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
             }
         }
 
+        function handleDisabledEditBar($btnEdit) {
+
+            $btnEdit.addClass('disabled');
+
+            var $tooltip = $('<div class="editmode-tooltip"><span class="tooltip-title"></span><span class="tooltip-message"></span></div>');
+            $tooltip.click(function (e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            });
+            $btnEdit.append($tooltip);
+            
+            var title = util.resx.PersonaBar["DisableEditBar"];
+            var message = util.resx.PersonaBar["DisableEditBar.Help"];
+
+            $btnEdit.find(".editmode-tooltip > span").fadeOut('fast', '', function () {
+                $btnEdit.find('.tooltip-title').html(title);
+                $btnEdit.find('.tooltip-message').html(message);
+
+                $btnEdit.find(".editmode-tooltip > span").fadeIn('fast');
+            });
+        }
+
         function handleLockEditState($btnEdit) {
             var $tooltip = $('<div class="editmode-tooltip"><span class="tooltip-title"></span><span class="tooltip-message"></span></div>');
             $tooltip.click(function(e) {
@@ -737,8 +760,9 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                         var viewModel = {
                             resx: util.resx.PersonaBar,
                             menu: menuViewModel.menu,
+                            upToDate: ko.observable(true),
                             updateLink: ko.observable(''),
-                            updateType: ko.observable(0),
+                            updateCritical: ko.observable(false),
                             logOff: function() {
                                 function onLogOffSuccess() {
                                     if (typeof window.top.dnn != "undefined" && typeof window.top.dnn.PersonaBar != "undefined") {
@@ -753,7 +777,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                         };
 
                         viewModel.updateText = ko.computed(function() {
-                            return viewModel.updateType() === 2 ? util.resx.PersonaBar.CriticalUpdate : util.resx.PersonaBar.NormalUpdate;
+                            return util.resx.PersonaBar.Update;
                         });
 
                         ko.applyBindings(viewModel, document.getElementById('personabar'));
@@ -762,9 +786,10 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
 
                         util.sf.moduleRoot = 'personabar';
                         util.sf.controller = "serversummary";
-                        util.sf.getsilence('GetUpdateLink', {}, function (data) {
+                        util.sf.getsilence('GetUpdateInfo', {}, function (data) {
+                            viewModel.upToDate(data.UpToDate);
                             viewModel.updateLink(data.Url);
-                            viewModel.updateType(data.Type);
+                            viewModel.updateCritical(data.Critical);
                         });
 
                         document.addEventListener("click", function(e) {
@@ -1046,6 +1071,11 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                             (function setupEditButton() {
                                 var $btnEdit = $("#Edit.btn_panel");
                                 if (!config.visible) {
+                                    return;
+                                }
+
+                                if (disableEditBar) {
+                                    handleDisabledEditBar($btnEdit);
                                     return;
                                 }
 

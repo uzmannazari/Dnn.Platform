@@ -20,8 +20,12 @@ namespace DotNetNuke.UI.Skins.Controls
 
         public string Name { get; set; }
 
-        public string StyleSheet { get; set; }
-
+        public string StyleSheet { get; set; } 
+        //Bazrafshan
+        //START Persian-DnnSoftware
+        private int _priority = 10;
+        public int Priority { set { _priority = value; } get { return ((int)Web.Client.FileOrder.Css.SkinCss) + _priority; } }
+        //END Persian-DnnSoftware
         public bool UseSkinPath
         {
             get

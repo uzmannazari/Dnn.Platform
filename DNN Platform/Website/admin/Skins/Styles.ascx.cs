@@ -59,41 +59,63 @@ namespace DotNetNuke.UI.Skins.Controls
                         skinpath = ((Skin)this.Parent).SkinPath;
                     }
 
-                    var objLink = new HtmlLink();
-                    objLink.ID = Globals.CreateValidID(this.Name);
-                    objLink.Attributes["rel"] = "stylesheet";
-                    objLink.Attributes["type"] = "text/css";
+                    //Bazrafshan
                     //START Persian-DnnSoftware
-                    if (System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+                    if ((System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft))
                     {
-                        if (System.IO.File.Exists(this.Server.MapPath(skinpath + this.StyleSheet.Replace(".css", ".rtl.css"))))
-                            this.StyleSheet = this.StyleSheet.Replace(".css", ".rtl.css");
-                    }
-                    //END Persian-DnnSoftware
-                    objLink.Href = skinpath + this.StyleSheet;
-                    if (this.Media != string.Empty)
-                    {
-                        objLink.Attributes["media"] = this.Media; // NWS: add support for "media" attribute
-                    }
-
-                    if (this.IsFirst)
-                    {
-                        // Find the first HtmlLink
-                        int iLink;
-                        for (iLink = 0; iLink <= objCSS.Controls.Count - 1; iLink++)
+                        string skinfile = skinpath + StyleSheet.Replace(".css", ".rtl.css");
+                        skinfile = skinfile.Substring((skinfile.IndexOf("Portals") > 0 ? skinfile.IndexOf("Portals") : skinfile.IndexOf("DesktopModules") > 0 ? skinfile.IndexOf("DesktopModules") : 0));
+                        if (System.IO.File.Exists(Server.MapPath("~/" + skinfile)))
                         {
-                            if (objCSS.Controls[iLink] is HtmlLink)
-                            {
-                                break;
-                            }
+                            DotNetNuke.Web.Client.ClientResourceManagement.ClientResourceManager.RegisterStyleSheet(this.Page, skinfile, Priority);
                         }
-
-                        this.AddLink(objCSS, iLink, objLink);
+                        else
+                        {
+                            DotNetNuke.Web.Client.ClientResourceManagement.ClientResourceManager.RegisterStyleSheet(this.Page, skinpath + StyleSheet, Priority);
+                        }
                     }
                     else
                     {
-                        this.AddLink(objCSS, -1, objLink);
+                        DotNetNuke.Web.Client.ClientResourceManagement.ClientResourceManager.RegisterStyleSheet(this.Page, skinpath + StyleSheet, Priority);
                     }
+
+                    //var objLink = new HtmlLink();
+                    //objLink.ID = Globals.CreateValidID(this.Name);
+                    //objLink.Attributes["rel"] = "stylesheet";
+                    //objLink.Attributes["type"] = "text/css";
+                    ////START Persian-DnnSoftware
+                    //if (System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
+                    //{
+                    //    if (System.IO.File.Exists(this.Server.MapPath(skinpath + this.StyleSheet.Replace(".css", ".rtl.css"))))
+                    //        this.StyleSheet = this.StyleSheet.Replace(".css", ".rtl.css");
+                    //}
+                    ////END Persian-DnnSoftware
+                    //objLink.Href = skinpath + this.StyleSheet;
+                    //if (this.Media != string.Empty)
+                    //{
+                    //    objLink.Attributes["media"] = this.Media; // NWS: add support for "media" attribute
+                    //}
+
+                    //if (this.IsFirst)
+                    //{
+                    //    // Find the first HtmlLink
+                    //    int iLink;
+                    //    for (iLink = 0; iLink <= objCSS.Controls.Count - 1; iLink++)
+                    //    {
+                    //        if (objCSS.Controls[iLink] is HtmlLink)
+                    //        {
+                    //            break;
+                    //        }
+                    //    }
+
+                    //    this.AddLink(objCSS, iLink, objLink);
+                    //}
+                    //else
+                    //{
+                    //    this.AddLink(objCSS, -1, objLink);
+                    //}
+
+                    //END Persian-DnnSoftware
                 }
             }
         }

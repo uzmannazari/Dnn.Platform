@@ -183,9 +183,17 @@ namespace DotNetNuke.Framework
         {
             base.OnInit(e);
             //START Persian-DnnSoftware
+            //404 Page RLT Bug Fix
+            if (this.PortalSettings.CultureCode == "fa-IR")
+            {
+                var newCulture = Services.Localization.Persian.PersianController.NewCultureInfo("fa-IR");
+                System.Threading.Thread.CurrentThread.CurrentUICulture = newCulture;
+            }
             //Right to Left Layout
             if (CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)
                 Body.Attributes.Add("class", "rtl ");
+
+            
             //END Persian-DnnSoftware
 
             // set global page settings

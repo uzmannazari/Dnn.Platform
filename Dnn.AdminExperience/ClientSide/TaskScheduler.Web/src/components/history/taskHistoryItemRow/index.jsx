@@ -70,17 +70,46 @@ class TaskHistoryItemRow extends Component {
 
     getStartEndDisplay() {
         let display = "<span>&nbsp;</span>";
-        if (this.props.startDate) {
-            display = "<p>S: " + this.props.startDate + "</p>";
+        //START persian-dnnsoftware
+        if (window.parent["personaBarSettings"]["culture"] === "fa-IR") {
+            if (this.props.startDate) {
+                display = "<p>شروع: " + this.getPersianDate(this.props.startDate,true) + "</p>";
+            }
+            if (this.props.endDate) {
+                display += "<p>پایان: " + this.getPersianDate(this.props.endDate,true) + "</p>";
+            }
+            if (this.props.nextStart) {
+                display += "<p>بعدی: " + this.getPersianDate(this.props.nextStart,true) + "</p>";
+            }
         }
-        if (this.props.endDate) {
-            display += "<p>E: " + this.props.endDate + "</p>";
+        else {
+
+            if (this.props.startDate) {
+                display = "<p>S: " + this.props.startDate + "</p>";
+            }
+            if (this.props.endDate) {
+                display += "<p>E: " + this.props.endDate + "</p>";
+            }
+            if (this.props.nextStart) {
+                display += "<p>N: " + this.props.nextStart + "</p>";
+            }
         }
-        if (this.props.nextStart) {
-            display += "<p>N: " + this.props.nextStart + "</p>";
-        }
+        //END persian-dnnsoftware
         return <div dangerouslySetInnerHTML={{ __html: display }}></div>;
     }
+
+    //START persian-dnnsoftware
+    getPersianDate(date,longformat)
+    {
+        return longformat === true?new Date(date).toLocaleString("fa-IR",{
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit",
+            hour:"2-digit",
+            minute:"2-digit"
+        }).replace("،","  -  "): new Date(date).toLocaleDateString("fa-IR");
+    }
+    //END persian-dnnsoftware
 
     render() {
         return (

@@ -5,7 +5,10 @@
 
 <asp:Panel runat="server" ID="ResourceManagerContainer" CssClass="rm-container" data-init-callback="initResourceLibrary">
 </asp:Panel>
-
+<%--START Persian-DnnSoftware--%>
+<%--به صورت موقت تارفع مشکل فشرده سازی--%>
+<script src="<%=this.ResolveUrl("Scripts/resourceManager-bundle.js") %>" type="text/javascript"></script>
+<%--END Persian-DnnSoftware--%>
 <script>
   $(function () {
     function resxCallback200(data) {

@@ -217,7 +217,11 @@ namespace Dnn.Modules.ResourceManager
             {
                 JavaScript.RequestRegistration(CommonJs.DnnPlugins);
                 ClientResourceManager.RegisterScript(this.Page, Constants.ModulePath + "Scripts/dnn.Localization.js");
-                ClientResourceManager.RegisterScript(this.Page, this.bundleJsPath);
+                // START Persian-DnnSoftware
+                // تارفع مشکل فشرده سازی غیرفعال باشد 
+                // همین صفحه اضافه میشود aspx به صورت دستی در سورس 
+                //ClientResourceManager.RegisterScript(this.Page, this.bundleJsPath);
+                // END Persian-DnnSoftware
             }
             catch (ModeValidationException exc)
             {

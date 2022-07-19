@@ -22,7 +22,9 @@ namespace Dnn.Modules.ResourceManager
     /// </summary>
     public partial class View : PortalModuleBase
     {
-        private readonly string bundleJsPath;
+        // START Persian-DnnSoftware
+        // private readonly string bundleJsPath;
+        // END Persian-DnnSoftware
         private int? gid;
         private int? folderId;
         private string extensionWhitelist;
@@ -34,14 +36,14 @@ namespace Dnn.Modules.ResourceManager
         public View()
         {
             // START Persian-DnnSoftware
-            if (System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)
-            {
-                this.bundleJsPath = Constants.ModulePath + "Scripts/resourceManager-bundle.rtl.js";
-            }
-            else
-            {
-                this.bundleJsPath = Constants.ModulePath + "Scripts/resourceManager-bundle.js";
-            }
+            // if (System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)
+            // {
+            //    this.bundleJsPath = Constants.ModulePath + "Scripts/resourceManager-bundle.rtl.js";
+            // }
+            // else
+            // {
+            //    this.bundleJsPath = Constants.ModulePath + "Scripts/resourceManager-bundle.js";
+            // }
 
             // END Persian-DnnSoftware
         }
@@ -217,10 +219,11 @@ namespace Dnn.Modules.ResourceManager
             {
                 JavaScript.RequestRegistration(CommonJs.DnnPlugins);
                 ClientResourceManager.RegisterScript(this.Page, Constants.ModulePath + "Scripts/dnn.Localization.js");
+
                 // START Persian-DnnSoftware
-                // تارفع مشکل فشرده سازی غیرفعال باشد 
-                // همین صفحه اضافه میشود aspx به صورت دستی در سورس 
-                //ClientResourceManager.RegisterScript(this.Page, this.bundleJsPath);
+                // تارفع مشکل فشرده سازی غیرفعال باشد
+                // همین صفحه اضافه میشود aspx به صورت دستی در سورس
+                // ClientResourceManager.RegisterScript(this.Page, this.bundleJsPath);
                 // END Persian-DnnSoftware
             }
             catch (ModeValidationException exc)

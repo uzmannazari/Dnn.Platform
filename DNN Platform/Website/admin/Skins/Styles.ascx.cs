@@ -20,7 +20,7 @@ namespace DotNetNuke.UI.Skins.Controls
 
         public string Name { get; set; }
 
-        public string StyleSheet { get; set; } 
+        public string StyleSheet { get; set; }
         //Bazrafshan
         //START Persian-DnnSoftware
         private int _priority = 10;
@@ -65,13 +65,21 @@ namespace DotNetNuke.UI.Skins.Controls
 
                     //Bazrafshan
                     //START Persian-DnnSoftware
-                    if ((System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft))
+
+                    if (string.IsNullOrEmpty(this.Condition))
                     {
-                        string skinfile = skinpath + StyleSheet.Replace(".css", ".rtl.css");
-                        skinfile = skinfile.Substring((skinfile.IndexOf("Portals") > 0 ? skinfile.IndexOf("Portals") : skinfile.IndexOf("DesktopModules") > 0 ? skinfile.IndexOf("DesktopModules") : 0));
-                        if (System.IO.File.Exists(Server.MapPath("~/" + skinfile)))
+                        if ((System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft))
                         {
-                            DotNetNuke.Web.Client.ClientResourceManagement.ClientResourceManager.RegisterStyleSheet(this.Page, skinfile, Priority);
+                            string skinfile = skinpath + StyleSheet.Replace(".css", ".rtl.css");
+                            skinfile = skinfile.Substring((skinfile.IndexOf("Portals") > 0 ? skinfile.IndexOf("Portals") : skinfile.IndexOf("DesktopModules") > 0 ? skinfile.IndexOf("DesktopModules") : 0));
+                            if (System.IO.File.Exists(Server.MapPath("~/" + skinfile)))
+                            {
+                                DotNetNuke.Web.Client.ClientResourceManagement.ClientResourceManager.RegisterStyleSheet(this.Page, skinfile, Priority);
+                            }
+                            else
+                            {
+                                DotNetNuke.Web.Client.ClientResourceManagement.ClientResourceManager.RegisterStyleSheet(this.Page, skinpath + StyleSheet, Priority);
+                            }
                         }
                         else
                         {
@@ -80,45 +88,33 @@ namespace DotNetNuke.UI.Skins.Controls
                     }
                     else
                     {
-                        DotNetNuke.Web.Client.ClientResourceManagement.ClientResourceManager.RegisterStyleSheet(this.Page, skinpath + StyleSheet, Priority);
+                        string skinfile = skinpath + StyleSheet.Replace(".css", ".rtl.css");
+                        skinfile = skinfile.Substring((skinfile.IndexOf("Portals") > 0 ? skinfile.IndexOf("Portals") : skinfile.IndexOf("DesktopModules") > 0 ? skinfile.IndexOf("DesktopModules") : 0));
+                        var objLink = new HtmlLink();
+                        objLink.ID = Globals.CreateValidID(this.Name);
+                        objLink.Attributes["rel"] = "stylesheet";
+                        objLink.Attributes["type"] = "text/css";
+                        objLink.Href = skinfile.Replace("../", "/");
+
+                        if (this.IsFirst)
+                        {
+                            // Find the first HtmlLink
+                            int iLink;
+                            for (iLink = 0; iLink <= objCSS.Controls.Count - 1; iLink++)
+                            {
+                                if (objCSS.Controls[iLink] is HtmlLink)
+                                {
+                                    break;
+                                }
+                            }
+
+                            this.AddLink(objCSS, iLink, objLink);
+                        }
+                        else
+                        {
+                            this.AddLink(objCSS, -1, objLink);
+                        }
                     }
-
-                    //var objLink = new HtmlLink();
-                    //objLink.ID = Globals.CreateValidID(this.Name);
-                    //objLink.Attributes["rel"] = "stylesheet";
-                    //objLink.Attributes["type"] = "text/css";
-                    ////START Persian-DnnSoftware
-                    //if (System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft)
-                    //{
-                    //    if (System.IO.File.Exists(this.Server.MapPath(skinpath + this.StyleSheet.Replace(".css", ".rtl.css"))))
-                    //        this.StyleSheet = this.StyleSheet.Replace(".css", ".rtl.css");
-                    //}
-                    ////END Persian-DnnSoftware
-                    //objLink.Href = skinpath + this.StyleSheet;
-                    //if (this.Media != string.Empty)
-                    //{
-                    //    objLink.Attributes["media"] = this.Media; // NWS: add support for "media" attribute
-                    //}
-
-                    //if (this.IsFirst)
-                    //{
-                    //    // Find the first HtmlLink
-                    //    int iLink;
-                    //    for (iLink = 0; iLink <= objCSS.Controls.Count - 1; iLink++)
-                    //    {
-                    //        if (objCSS.Controls[iLink] is HtmlLink)
-                    //        {
-                    //            break;
-                    //        }
-                    //    }
-
-                    //    this.AddLink(objCSS, iLink, objLink);
-                    //}
-                    //else
-                    //{
-                    //    this.AddLink(objCSS, -1, objLink);
-                    //}
-
                     //END Persian-DnnSoftware
                 }
             }
@@ -126,38 +122,40 @@ namespace DotNetNuke.UI.Skins.Controls
 
         protected void AddLink(Control cssRoot, int InsertAt, HtmlLink link)
         {
-            if (string.IsNullOrEmpty(this.Condition))
+            //START Persian-DnnSoftware
+            //if (string.IsNullOrEmpty(this.Condition))
+            //{
+            //    if (InsertAt == -1)
+            //    {
+            //        cssRoot.Controls.Add(link);
+            //    }
+            //    else
+            //    {
+            //        cssRoot.Controls.AddAt(InsertAt, link);
+            //    }
+            //}
+            //else
+            //{
+            var openif = new Literal();
+            openif.Text = string.Format("<!--[if {0}]>", this.Condition);
+            var closeif = new Literal();
+            closeif.Text = "<![endif]-->";
+            if (InsertAt == -1)
             {
-                if (InsertAt == -1)
-                {
-                    cssRoot.Controls.Add(link);
-                }
-                else
-                {
-                    cssRoot.Controls.AddAt(InsertAt, link);
-                }
+                cssRoot.Controls.Add(openif);
+                cssRoot.Controls.Add(link);
+                cssRoot.Controls.Add(closeif);
             }
             else
             {
-                var openif = new Literal();
-                openif.Text = string.Format("<!--[if {0}]>", this.Condition);
-                var closeif = new Literal();
-                closeif.Text = "<![endif]-->";
-                if (InsertAt == -1)
-                {
-                    cssRoot.Controls.Add(openif);
-                    cssRoot.Controls.Add(link);
-                    cssRoot.Controls.Add(closeif);
-                }
-                else
-                {
-                    // Since we want to add at a specific location, we do this in reverse order
-                    // this allows us to use the same insertion point
-                    cssRoot.Controls.AddAt(InsertAt, closeif);
-                    cssRoot.Controls.AddAt(InsertAt, link);
-                    cssRoot.Controls.AddAt(InsertAt, openif);
-                }
+                // Since we want to add at a specific location, we do this in reverse order
+                // this allows us to use the same insertion point
+                cssRoot.Controls.AddAt(InsertAt, closeif);
+                cssRoot.Controls.AddAt(InsertAt, link);
+                cssRoot.Controls.AddAt(InsertAt, openif);
             }
+            //}
+            //END Persian-DnnSoftware
         }
     }
 }

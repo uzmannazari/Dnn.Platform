@@ -2,6 +2,7 @@
 import utilities from "utils";
 import * as dayjs from "dayjs";
 
+
 export function formatDate(dateValue, longformat) {
     if (!dateValue) {
         return "";
@@ -15,8 +16,19 @@ export function formatDate(dateValue, longformat) {
     const localizedFormat = require("dayjs/plugin/localizedFormat");
     dayjs.extend(localizedFormat);
     require("dayjs/locale/" + utilities.getCulture().substring(0,2));
-
-    return dayjs(dateValue).locale(utilities.getCulture().substring(0,2)).format(longformat === true ? "LLL" : "L");
+    // //START persian-dnnsoftware
+    // if (window.parent["personaBarSettings"]["culture"] === "fa-IR") {
+    if (utilities.getCulture()==="fa-IR") {
+        return longformat === true?new Date(dateValue).toLocaleString("fa-IR",{
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit",
+            hour:"2-digit",
+            minute:"2-digit",
+            weekday:"short"}).replace("،","  -  "): new Date(dateValue).toLocaleDateString("fa-IR");
+    }
+    // //END persian-dnnsoftware
+    return  dayjs(dateValue).locale(utilities.getCulture().substring(0,2)).format(longformat === true ? "LLL" : "L");
 }
 
 export function validateEmail(value) {

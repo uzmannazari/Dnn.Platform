@@ -2,6 +2,23 @@
 
 ![DNN Platform At A Glance](dnnplatform.png)
 
+# نسخه فارسی دی ان ان (DNN)
+
+جامعه DNN فارسی جهت بومی سازی سریع و با کیفیت نسخه فارسی DNN این مخزن را راه اندازی کرده است.<br/>
+دانلود آخرین نسخه DNN فارسی به همراه سورس.
+بومی سازی هسته DNN فارسی با بالاترین کیفیت
+
+# دانلود DNN فارسی
+* [دانلود نسخه 9.10.2 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.10.2-persian) - (تاریخ انتشار :1400/08/01)
+* [دانلود نسخه 9.10.1 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.10.1-persian) - (تاریخ انتشار :1400/06/06)
+* [دانلود نسخه 9.10.0 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.10.0-persian) - (تاریخ انتشار :1400/05/04)
+* [دانلود نسخه 9.8.0 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.8.0-persian) - (تاریخ انتشار :1399/08/24)
+* [دانلود نسخه 9.7.0 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.7.0-persian) - (تاریخ انتشار :1399/06/10)
+* [دانلود نسخه 9.6.1 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.6.1-persian)
+* [دانلود نسخه 9.5 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.5.0-persian)
+* [دانلود نسخه 9.4.3 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.4.3-persian)
+* [دانلود نسخه 9.4.1 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.4.1-persian)
+
 # Project Description
 
 DNN® ( formerly DotNetNuke® ) is the leading open source web content management platform (CMS) in the Microsoft ecosystem. The product is used to build professional looking and easy-to-use commercial websites, social intranets, community portals, or partner extranets. Containing dynamic content of all types, DNN sites are easy to deploy and update. The DNN Platform has been downloaded more than 8 million times and powers more than 750,000 websites globally. A community of more than 1 million members forms a powerful support network. 

@@ -60,3 +60,11 @@ dnn-vertical-overflow-menu{
 dnn-collapsible{
   z-index: 1;
 }
+
+// START persian-dnnsoftware
+@if "body has class $rtl"{
+  button{
+    font-family: IRANSans;
+  }
+}
+// END persian-dnnsoftware

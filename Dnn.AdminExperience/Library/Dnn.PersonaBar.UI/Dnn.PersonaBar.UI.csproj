@@ -190,6 +190,7 @@
     <AdditionalFiles Include="..\..\..\stylecop.json">
       <Link>stylecop.json</Link>
     </AdditionalFiles>
+    <EmbeddedResource Include="admin\personaBar\resources\LocalResources.fa-IR.resources" />
     <None Include="admin\personaBar\css\fonts\IRANSansWeb_Light.eot" />
     <None Include="admin\personaBar\css\fonts\IRANSansWeb_Light.ttf" />
     <None Include="admin\personaBar\css\fonts\IRANSansWeb_Light.woff" />

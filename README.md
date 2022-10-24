@@ -1,12 +1,17 @@
+
 [![Build status](https://dotnet.visualstudio.com/DNN/_apis/build/status/dnnsoftware.Dnn.Platform?branchName=develop)](https://dotnet.visualstudio.com/DNN/_build/latest?definitionId=145&branchName=develop)
 
 ![DNN Platform At A Glance](dnnplatform.png)
-
-# نسخه فارسی دی ان ان (DNN)
+<div dir="rtl" align="right">
+  <h1>نسخه فارسی دی ان ان (DNN)</h1>
 
 جامعه DNN فارسی جهت بومی سازی سریع و با کیفیت نسخه فارسی DNN این مخزن را راه اندازی کرده است.<br/>
 دانلود آخرین نسخه DNN فارسی به همراه سورس.
 بومی سازی هسته DNN فارسی با بالاترین کیفیت
+
+
+## حمایت از دی ان ان فارسی
+  <a href="https://zarinp.al/Persian-DnnSoftware.ir"><img src='https://www.persian-dnnsoftware.ir/Portals/0/Images/Donate-200.png?ver=fyr_22nW-rkmf1ULsTwYMg%3d%3d' /></a>
 
 # دانلود DNN فارسی
 * [دانلود نسخه 9.11.0 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.11.0-persian) - (تاریخ انتشار :1401/07/17)
@@ -19,6 +24,7 @@
 * [دانلود نسخه 9.5 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.5.0-persian)
 * [دانلود نسخه 9.4.3 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.4.3-persian)
 * [دانلود نسخه 9.4.1 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.4.1-persian)
+  </div>
 
 # Project Description
 

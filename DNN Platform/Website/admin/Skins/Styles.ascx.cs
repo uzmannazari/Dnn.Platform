@@ -12,7 +12,7 @@ namespace DotNetNuke.UI.Skins.Controls
 
     public partial class Styles : SkinObjectBase
     {
-        private bool _useSkinPath = true;
+        private bool useSkinPath = true;
 
         public string Condition { get; set; }
 
@@ -30,17 +30,18 @@ namespace DotNetNuke.UI.Skins.Controls
         {
             get
             {
-                return this._useSkinPath;
+                return this.useSkinPath;
             }
 
             set
             {
-                this._useSkinPath = value;
+                this.useSkinPath = value;
             }
         }
 
         public string Media { get; set; }
 
+        /// <inheritdoc/>
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -120,27 +121,27 @@ namespace DotNetNuke.UI.Skins.Controls
             }
         }
 
-        protected void AddLink(Control cssRoot, int InsertAt, HtmlLink link)
+        protected void AddLink(Control cssRoot, int insertAt, HtmlLink link)
         {
-            //START Persian-DnnSoftware
-            //if (string.IsNullOrEmpty(this.Condition))
-            //{
-            //    if (InsertAt == -1)
+            // START Persian-DnnSoftware
+            // if (string.IsNullOrEmpty(this.Condition))
+            // {
+            //    if (insertAt == -1)
             //    {
             //        cssRoot.Controls.Add(link);
             //    }
             //    else
             //    {
-            //        cssRoot.Controls.AddAt(InsertAt, link);
+            //        cssRoot.Controls.AddAt(insertAt, link);
             //    }
-            //}
-            //else
-            //{
+            // }
+            // else
+            // {
             var openif = new Literal();
             openif.Text = string.Format("<!--[if {0}]>", this.Condition);
             var closeif = new Literal();
             closeif.Text = "<![endif]-->";
-            if (InsertAt == -1)
+            if (insertAt == -1)
             {
                 cssRoot.Controls.Add(openif);
                 cssRoot.Controls.Add(link);
@@ -150,12 +151,12 @@ namespace DotNetNuke.UI.Skins.Controls
             {
                 // Since we want to add at a specific location, we do this in reverse order
                 // this allows us to use the same insertion point
-                cssRoot.Controls.AddAt(InsertAt, closeif);
-                cssRoot.Controls.AddAt(InsertAt, link);
-                cssRoot.Controls.AddAt(InsertAt, openif);
+                cssRoot.Controls.AddAt(insertAt, closeif);
+                cssRoot.Controls.AddAt(insertAt, link);
+                cssRoot.Controls.AddAt(insertAt, openif);
             }
-            //}
-            //END Persian-DnnSoftware
+            // }
+            // END Persian-DnnSoftware
         }
     }
 }

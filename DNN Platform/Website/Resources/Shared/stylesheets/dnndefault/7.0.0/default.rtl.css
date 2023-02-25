@@ -3307,7 +3307,7 @@ body:not(.dnnEditState) .DNNEmptyPane {
 /*Edit In Place Tool Bar Classes*/
 .eipbackimg {
 	position:absolute;
-	margin-top:-32px;
+	margin-top:10px;
 	white-space:nowrap;
 	background:url(../../../../../images/eip_toolbar.png) repeat-x;
 	height:32px;

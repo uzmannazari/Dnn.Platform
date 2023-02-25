@@ -289,12 +289,12 @@ namespace DotNetNuke.Services.Install
 
             // START persian-dnnsoftware
             string defaultCSSPath = "../Resources/Shared/stylesheets/dnndefault/7.0.0/default.css";
-            if(_culture == null)
+            if(culture == null)
             {
-                _culture = "fa-IR";
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(_culture);
+                culture = "fa-IR";
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
             }
-            if (_culture.ToLower() == "fa-ir")
+            if (culture.ToLower() == "fa-ir")
             {
                 defaultCSSPath = "../Resources/Shared/stylesheets/dnndefault/7.0.0/default.rtl.css";
                 this.Body.Attributes.Add("class", "rtl");

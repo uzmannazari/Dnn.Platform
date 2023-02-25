@@ -22,7 +22,7 @@
   <script type="text/javascript" src="../Resources/Shared/Scripts/jquery/jquery.hoverIntent.min.js?ver=<%=DotNetNuke.Common.Globals.FormatVersion(ApplicationVersion)%>"></script>
   <asp:PlaceHolder ID="SCRIPTS" runat="server"></asp:PlaceHolder>
 </head>
-<body>
+<body id="Body" runat="server">
   <asp:PlaceHolder runat="server" ID="ClientResourceIncludes" />
   <form id="form1" runat="server">
     <asp:ScriptManager ID="scManager" runat="server" EnablePageMethods="true"></asp:ScriptManager>

@@ -67,6 +67,6 @@
     "webpack-dev-server": "3.1.14"
   },
   "dependencies": {
-    "@dnnsoftware/dnn-react-common": "9.11.1"
+    "@dnnsoftware/dnn-react-common": "workspace:^"
   }
 }

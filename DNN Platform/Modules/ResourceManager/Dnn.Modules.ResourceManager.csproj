@@ -269,6 +269,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\" />
+    <Content Include="App_LocalResources\EditFolderMapping.ascx.fa-IR.resx" />
+    <Content Include="App_LocalResources\ResourceManager.fa-IR.resx" />
+    <Content Include="App_LocalResources\Settings.ascx.fa-IR.resx" />
+    <Content Include="App_LocalResources\View.ascx.fa-IR.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

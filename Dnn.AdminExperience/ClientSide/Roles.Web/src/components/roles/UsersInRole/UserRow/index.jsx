@@ -35,7 +35,17 @@ class UserRow extends Component {
             return "-";
         }
 
-        return monthValue + "/" + dayValue + "/" + yearValue;
+        //START persian-dnnsoftware
+        if (window.parent["personaBarSettings"]["culture"] === "fa-IR") {
+            return new Date(date).toLocaleString("fa-IR",{
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit"
+            }).replace("،","  -  ");
+        }
+        //END persian-dnnsoftware
+    
+        return monthValue + "/" + dayValue + "/" + yearValue ;
     }
     onStartTimeClick(userRole, index) {
         this.setState({ editIndex: index, editCommand: "startTime", isCalendarVisible: true });

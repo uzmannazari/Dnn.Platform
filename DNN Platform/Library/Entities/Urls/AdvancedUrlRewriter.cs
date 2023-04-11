@@ -1393,28 +1393,35 @@ namespace DotNetNuke.Entities.Urls
         /// </remarks>
         private static bool IgnoreRequestForInstall(string physicalPath, string refererPath, string requestedDomain, string refererDomain)
         {
-            if (physicalPath.EndsWith("install.aspx", true, CultureInfo.InvariantCulture)
+            //START Persian-DnnSoftware
+            try
+            {
+            //END Persian-DnnSoftware
+                if (physicalPath.EndsWith("install.aspx", true, CultureInfo.InvariantCulture)
                 || physicalPath.EndsWith("installwizard.aspx", true, CultureInfo.InvariantCulture)
                 || physicalPath.EndsWith("upgradewizard.aspx", true, CultureInfo.InvariantCulture)
                 || Globals.Status == Globals.UpgradeStatus.Install
                 || Globals.Status == Globals.UpgradeStatus.Upgrade)
-            {
-                return true;
-            }
+                {
+                    return true;
+                }
 
-            // 954 : DNN 7.0 compatibility
-            // check for /default.aspx which is default Url launched from the Upgrade/Install wizard page
-            // 961 : check domain as well as path for the referer
-            if (physicalPath.EndsWith(Globals.glbDefaultPage, true, CultureInfo.InvariantCulture) == false
-                && refererPath != null
-                && string.Compare(requestedDomain, refererDomain, StringComparison.OrdinalIgnoreCase) == 0
-                && (refererPath.EndsWith("install.aspx", true, CultureInfo.InvariantCulture)
-                    || refererPath.EndsWith("installwizard.aspx", true, CultureInfo.InvariantCulture)
-                    || refererPath.EndsWith("upgradewizard.aspx", true, CultureInfo.InvariantCulture)))
-            {
-                return true;
+                // 954 : DNN 7.0 compatibility
+                // check for /default.aspx which is default Url launched from the Upgrade/Install wizard page
+                // 961 : check domain as well as path for the referer
+                if (physicalPath.EndsWith(Globals.glbDefaultPage, true, CultureInfo.InvariantCulture) == false
+                    && refererPath != null
+                    && string.Compare(requestedDomain, refererDomain, StringComparison.OrdinalIgnoreCase) == 0
+                    && (refererPath.EndsWith("install.aspx", true, CultureInfo.InvariantCulture)
+                        || refererPath.EndsWith("installwizard.aspx", true, CultureInfo.InvariantCulture)
+                        || refererPath.EndsWith("upgradewizard.aspx", true, CultureInfo.InvariantCulture)))
+                {
+                    return true;
+                }
+            //START Persian-DnnSoftware
             }
-
+            catch (Exception) { }
+            //END Persian-DnnSoftware
             return false;
         }
 
@@ -3115,12 +3122,21 @@ namespace DotNetNuke.Entities.Urls
             // URL validation
             // check for ".." escape characters commonly used by hackers to traverse the folder tree on the server
             // the application should always use the exact relative location of the resource it is requesting
-            var strURL = request.Url.AbsolutePath;
-            var strDoubleDecodeURL = server.UrlDecode(server.UrlDecode(request.Url.AbsolutePath)) ?? string.Empty;
-            if (UrlSlashesRegex.Match(strURL).Success || UrlSlashesRegex.Match(strDoubleDecodeURL).Success)
-            {
-                throw new HttpException(404, "Not Found");
-            }
+
+            //START Persian-DnnSoftware
+            var regx = new Regex("[\\\\/]\\.\\.[\\\\/]", RegexOptions.Compiled);
+            string url = server.UrlDecode(server.UrlDecode(request.Url.AbsolutePath)) ?? "";
+            if (!regx.Match(request.Url.AbsolutePath).Success && !regx.Match(url).Success)
+                return;
+            app.Context.Response.Redirect(app.Context.Request.Url.Host.ToString(), true);
+
+            //var strURL = request.Url.AbsolutePath;
+            //var strDoubleDecodeURL = server.UrlDecode(server.UrlDecode(request.Url.AbsolutePath)) ?? string.Empty;
+            //if (UrlSlashesRegex.Match(strURL).Success || UrlSlashesRegex.Match(strDoubleDecodeURL).Success)
+            //{
+            //    throw new HttpException(404, "Not Found");
+            //}
+            //END Persian-DnnSoftware
         }
     }
 }

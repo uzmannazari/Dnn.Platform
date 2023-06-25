@@ -14,8 +14,8 @@
   <a href="https://zarinp.al/Persian-DnnSoftware.ir"><img src='https://www.persian-dnnsoftware.ir/Portals/0/Images/Donate-200.png?ver=fyr_22nW-rkmf1ULsTwYMg%3d%3d' /></a>
 
 # دانلود DNN فارسی
-* [دانلود نسخه 9.12.0 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.12.0-persian) - (تاریخ انتشار :1401/04/04)
-* [دانلود نسخه 9.11.2 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.11.2-persian) - (تاریخ انتشار :1401/01/24)
+* [دانلود نسخه 9.12.0 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.12.0-persian) - (تاریخ انتشار :1402/04/04)
+* [دانلود نسخه 9.11.2 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.11.2-persian) - (تاریخ انتشار :1402/01/24)
 * [دانلود نسخه 9.11.1 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.11.1-persian) - (تاریخ انتشار :1401/12/08)
 * [دانلود نسخه 9.11.0 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.11.0-persian) - (تاریخ انتشار :1401/07/17)
 * [دانلود نسخه 9.10.2 دی ان ان فارسی](https://github.com/Persian-DnnSoftware/Dnn.Platform/releases/tag/v9.10.2-persian) - (تاریخ انتشار :1400/08/01)

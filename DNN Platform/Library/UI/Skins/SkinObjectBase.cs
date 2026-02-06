@@ -36,6 +36,11 @@ namespace DotNetNuke.UI.Skins
         /// <remarks>
         /// This allows opting-in into new more modern rendering behaviors.
         /// </remarks>
-        protected int RenderingVersion { get; set; }
+        public int RenderingVersionPublic
+        {
+            get => RenderingVersion;
+            set => RenderingVersion = value;
+        }
     }
 }
+
